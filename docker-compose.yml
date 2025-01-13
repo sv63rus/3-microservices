@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api-gateway:/var/www
+    environment:
+      - APP_ENV=prod
+      - APP_DEBUG=false
+    depends_on:
+      - orders-service
+      - products-service
+
+  orders-service:
+    build:
+      context: ./orders-service
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8000"
+    environment:
+      - APP_ENV=prod
+      - APP_DEBUG=false
+
+  products-service:
+    build:
+      context: ./products-service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+    environment:
+      - APP_ENV=prod
+      - APP_DEBUG=false
