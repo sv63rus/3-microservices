@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    volumes:
-      - ./api-gateway:/var/www
     environment:
       - APP_ENV=prod
       - APP_DEBUG=false
